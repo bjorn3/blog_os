@@ -1,14 +1,22 @@
-#![cfg_attr(not(test), no_std)]
-#![cfg_attr(not(test), no_main)]
+//#![cfg_attr(not(test), no_std)]
+//#![cfg_attr(not(test), no_main)]
+#![cfg_attr(target_os = "none", no_std)]
+#![cfg_attr(target_os = "none", no_main)]
 #![cfg_attr(test, allow(unused_imports))]
 
 use blog_os::println;
 use bootloader::{entry_point, BootInfo};
 use core::panic::PanicInfo;
 
+#[cfg(target_os = "none")]
 entry_point!(kernel_main);
 
-#[cfg(not(test))]
+#[cfg(not(target_os = "none"))]
+fn main() {
+    panic!("please compile for the x86_64-blog_os.json target");
+}
+
+#[cfg(target_os = "none")]
 fn kernel_main(boot_info: &'static BootInfo) -> ! {
     use blog_os::interrupts::PICS;
     use blog_os::memory;
@@ -37,7 +45,7 @@ fn kernel_main(boot_info: &'static BootInfo) -> ! {
 }
 
 /// This function is called on panic.
-#[cfg(not(test))]
+#[cfg(target_os = "none")]
 #[panic_handler]
 fn panic(info: &PanicInfo) -> ! {
     println!("{}", info);

@@ -175,7 +175,7 @@ pub fn _print(args: fmt::Arguments) {
     });
 }
 
-#[cfg(test)]
+#[cfg(all(not(target_os = "none"), test))]
 mod test {
     use super::*;
 

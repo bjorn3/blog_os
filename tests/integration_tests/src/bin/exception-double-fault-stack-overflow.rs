@@ -1,13 +1,12 @@
 #![feature(abi_x86_interrupt)]
 #![no_std]
-#![cfg_attr(not(test), no_main)]
-#![cfg_attr(test, allow(dead_code, unused_macros, unused_imports))]
+#![no_main]
+#![deny(warnings)]
 
-use blog_os::{exit_qemu, serial_println};
+use blog_os::{exit_qemu, ExitCode, serial_println};
 use core::panic::PanicInfo;
 use lazy_static::lazy_static;
 
-#[cfg(not(test))]
 #[no_mangle]
 #[allow(unconditional_recursion)]
 pub extern "C" fn _start() -> ! {
@@ -21,25 +20,24 @@ pub extern "C" fn _start() -> ! {
     // trigger a stack overflow
     stack_overflow();
 
-    serial_println!("failed");
+    serial_println!("bootimage:stderr");
     serial_println!("No exception occured");
 
     unsafe {
-        exit_qemu();
+        exit_qemu(ExitCode::Failure);
     }
 
     loop {}
 }
 
 /// This function is called on panic.
-#[cfg(not(test))]
+
 #[panic_handler]
 fn panic(info: &PanicInfo) -> ! {
-    serial_println!("failed");
     serial_println!("{}", info);
 
     unsafe {
-        exit_qemu();
+        exit_qemu(ExitCode::Failure);
     }
 
     loop {}
@@ -68,10 +66,8 @@ extern "x86-interrupt" fn double_fault_handler(
     _stack_frame: &mut InterruptStackFrame,
     _error_code: u64,
 ) {
-    serial_println!("ok");
-
     unsafe {
-        exit_qemu();
+        exit_qemu(ExitCode::Success);
     }
     loop {}
 }
