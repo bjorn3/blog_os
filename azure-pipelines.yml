@@ -63,7 +63,7 @@ steps:
   condition: eq( variables['Agent.OS'], 'Darwin' )
   displayName: 'Build (macOS)'
 
-- script: cargo rustc -- -C link-arg=/ENTRY:_start -C link-arg=/SUBSYSTEM:console
+- script: cargo rustc -- -C link-arg=/NODEFAULTLIB -C link-arg=/ENTRY:_start -C link-arg=/SUBSYSTEM:console
   condition: eq( variables['Agent.OS'], 'Windows_NT' )
   displayName: 'Build (Windows)'
 
