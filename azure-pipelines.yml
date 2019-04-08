@@ -67,7 +67,7 @@ steps:
   condition: eq( variables['Agent.OS'], 'Windows_NT' )
   displayName: 'Build (Windows)'
 
-- script: cargo rustc -- -C link-args="/ENTRY:_start /SUBSYSTEM:console"
+- script: cargo rustc -- -C link-args="/ENTRY:_start /SUBSYSTEM:windows"
   condition: eq( variables['Agent.OS'], 'Windows_NT' )
   displayName: 'Build (Windows)'
 
