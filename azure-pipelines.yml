@@ -63,7 +63,7 @@ steps:
   condition: eq( variables['Agent.OS'], 'Darwin' )
   displayName: 'Build (macOS)'
 
-- script: cargo build
+- script: cargo rustc -- -C link-args="-e__start"
   condition: eq( variables['Agent.OS'], 'Darwin' )
   displayName: 'Build (macOS)'
 
