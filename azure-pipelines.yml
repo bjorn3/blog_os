@@ -67,6 +67,10 @@ steps:
   condition: eq( variables['Agent.OS'], 'Windows_NT' )
   displayName: 'Build (Windows)'
 
+- script: cargo build
+  condition: eq( variables['Agent.OS'], 'Windows_NT' )
+  displayName: 'Build (Windows)'
+
 - script: rustup component add rustfmt
   displayName: 'Install Rustfmt'
 
