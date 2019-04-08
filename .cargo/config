@@ -5,4 +5,4 @@ rustflags = ["-C", "link-arg=-nostartfiles"]
 rustflags = ["-C", "link-args=/ENTRY:_start /SUBSYSTEM:console"]
 
 [target.'cfg(target_os = "macos")']
-rustflags = ["-C", "link-args=-e__start -static -nostartfiles"]
+rustflags = ["-C", "link-args=-e __start -static -nostartfiles"]
