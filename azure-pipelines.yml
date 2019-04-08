@@ -59,11 +59,11 @@ steps:
   condition: eq( variables['Agent.OS'], 'Linux' )
   displayName: 'Build (Linux)'
 
-- script: cargo rustc -- -C link-arg=-lSystem
+- script: cargo rustc -- -C link-arg=-lSystem -C link-arg=-e__start
   condition: eq( variables['Agent.OS'], 'Darwin' )
   displayName: 'Build (macOS)'
 
-- script: cargo build
+- script: cargo rustc -- -C link-arg=/ENTRY:_start
   condition: eq( variables['Agent.OS'], 'Windows_NT' )
   displayName: 'Build (Windows)'
 

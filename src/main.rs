@@ -3,21 +3,8 @@
 
 use core::panic::PanicInfo;
 
-#[cfg(target_os = "linux")]
 #[no_mangle]
 pub extern "C" fn _start() -> ! {
-    loop {}
-}
-
-#[cfg(target_os = "windows")]
-#[no_mangle]
-pub extern "C" fn mainCRTStartup() -> ! {
-    main();
-}
-
-#[cfg(target_os = "macos")]
-#[no_mangle]
-pub extern "C" fn main() -> ! {
     loop {}
 }
 
