@@ -15,7 +15,7 @@ pub extern "C" fn mainCRTStartup() -> ! {
     main();
 }
 
-#[cfg(any(target_os = "windows", target_os = "macos"))]
+#[cfg(target_os = "macos")]
 #[no_mangle]
 pub extern "C" fn main() -> ! {
     loop {}
