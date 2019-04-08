@@ -55,15 +55,15 @@ steps:
   displayName: 'Print Rust Version'
   continueOnError: true
 
-- script: cargo rustc -- -Clink-arg=-nostartfiles
+- script: cargo rustc -- -C link-arg=-nostartfiles
   condition: eq( variables['Agent.OS'], 'Linux' )
   displayName: 'Build (Linux)'
 
-- script: cargo rustc -- -Clink-arg=-nostartfiles -Clink-arg=-static -C link-arg=-e__start
+- script: cargo rustc -- -C link-args="-nostartfiles -static -e__start"
   condition: eq( variables['Agent.OS'], 'Darwin' )
   displayName: 'Build (macOS)'
 
-- script: cargo rustc -- -C link-arg=/NODEFAULTLIB -C link-arg=/ENTRY:_start -C link-arg=/SUBSYSTEM:console
+- script: cargo rustc -- -C link-args="/NODEFAULTLIB /ENTRY:_start /SUBSYSTEM:console"
   condition: eq( variables['Agent.OS'], 'Windows_NT' )
   displayName: 'Build (Windows)'
 
