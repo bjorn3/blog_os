@@ -47,7 +47,7 @@ steps:
   displayName: 'Print Rust Version'
   continueOnError: true
 
-- script: cargo rustc -- -Clink-arg=-nostartfiles
+- script: cargo rustc -- -Clink-arg=-nostartfiles -Clink-arg=-static
   displayName: 'Build'
 
 - script: rustup component add rustfmt
