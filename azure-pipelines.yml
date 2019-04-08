@@ -55,8 +55,17 @@ steps:
   displayName: 'Print Rust Version'
   continueOnError: true
 
-- script: cargo rustc -- -Clink-arg=-nostartfiles -Clink-arg=-static -Clink-arg=-estart
-  displayName: 'Build'
+- script: cargo rustc -- -Clink-arg=-nostartfiles
+  condition: eq( variables['Agent.OS'], 'Linux' )
+  displayName: 'Build (Linux)'
+
+- script: cargo rustc -- -C link-arg=-lSystem
+  condition: eq( variables['Agent.OS'], 'Darwin' )
+  displayName: 'Build (macOS)'
+
+- script: cargo build
+  condition: eq( variables['Agent.OS'], 'Windows_NT' )
+  displayName: 'Build (Windows)'
 
 - script: rustup component add rustfmt
   displayName: 'Install Rustfmt'
