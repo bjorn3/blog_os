@@ -55,8 +55,23 @@ steps:
   displayName: 'Print Rust Version'
   continueOnError: true
 
-- script: cargo build
-  displayName: 'Build'
+- script: rustup target add thumbv7em-none-eabihf
+  displayName: Add thumbv7em-none-eabihf Target
+
+- script: cargo build --target thumbv7em-none-eabihf
+  displayName: 'Build for thumbv7em-none-eabihf'
+
+- script: cargo rustc -- -C link-arg=-nostartfiles
+  condition: eq( variables['Agent.OS'], 'Linux' )
+  displayName: 'Build for Linux'
+
+- script: cargo rustc -- -C link-args="/ENTRY:_start /SUBSYSTEM:console"
+  condition: eq( variables['Agent.OS'], 'Windows_NT' )
+  displayName: 'Build for Windows'
+
+- script: cargo rustc -- -C link-args="-e __start -static -nostartfiles"
+  condition: eq( variables['Agent.OS'], 'Darwin' )
+  displayName: 'Build for macOS'
 
 - script: rustup component add rustfmt
   displayName: 'Install Rustfmt'
