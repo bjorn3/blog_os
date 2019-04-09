@@ -65,13 +65,13 @@ steps:
   condition: eq( variables['Agent.OS'], 'Linux' )
   displayName: 'Build for Linux'
 
-- script: cargo rustc -- -C link-args="/ENTRY:_start /SUBSYSTEM:console"
-  condition: eq( variables['Agent.OS'], 'Windows_NT' )
-  displayName: 'Build for Windows'
-
 - script: cargo rustc -- -C link-args="-e __start -static -nostartfiles"
   condition: eq( variables['Agent.OS'], 'Darwin' )
   displayName: 'Build for macOS'
+
+- script: cargo rustc -- -C link-args="/ENTRY:_start /SUBSYSTEM:console"
+  condition: eq( variables['Agent.OS'], 'Windows_NT' )
+  displayName: 'Build for Windows'
 
 - script: rustup component add rustfmt
   displayName: 'Install Rustfmt'
