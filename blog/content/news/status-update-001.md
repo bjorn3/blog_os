@@ -16,6 +16,8 @@ TODO
 - [Rewrite bootimage for new bootloader build system](https://github.com/rust-osdev/bootimage/pull/34)
 - Release versions 0.7.0 and 0.7.1 ([changelog](https://github.com/rust-osdev/bootimage/blob/master/Changelog.md#071))
 
+- [New features for `bootimage runner`](https://github.com/rust-osdev/bootimage/pull/36)
+
 ## Blog OS
 
 - [Update to new bootloader 0.5.1 and bootimage 0.7.2](https://github.com/phil-opp/blog_os/pull/575)
