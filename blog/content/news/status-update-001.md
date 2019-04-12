@@ -17,6 +17,7 @@ TODO
 - Release versions 0.7.0 and 0.7.1 ([changelog](https://github.com/rust-osdev/bootimage/blob/master/Changelog.md#071))
 
 - [New features for `bootimage runner`](https://github.com/rust-osdev/bootimage/pull/36)
+    - Released as version 0.7.2 ([changelog](https://github.com/rust-osdev/bootimage/blob/master/Changelog.md#072))
 
 ## Blog OS
 
