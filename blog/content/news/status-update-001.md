@@ -25,3 +25,4 @@ TODO
 - [Rewrite the linking section of _"A Freestanding Rust Binary"_](https://github.com/phil-opp/blog_os/pull/577)
 - [Migrate from Netlify to Github Pages](https://github.com/phil-opp/blog_os/pull/579)
 - [Minimal Rust Kernel: Use a runner to make cargo xrun work](https://github.com/phil-opp/blog_os/pull/582)
+    - [Add `.cargo/config` file to post-02 branch](https://github.com/phil-opp/blog_os/pull/583)
