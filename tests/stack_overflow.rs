@@ -1,47 +1,37 @@
-#![feature(abi_x86_interrupt)]
 #![no_std]
-#![cfg_attr(not(test), no_main)]
-#![cfg_attr(test, allow(dead_code, unused_macros, unused_imports))]
+#![no_main]
+#![feature(abi_x86_interrupt)]
 
-use blog_os::{exit_qemu, serial_println};
+use blog_os::{exit_qemu, serial_print, serial_println, QemuExitCode};
 use core::panic::PanicInfo;
 use lazy_static::lazy_static;
 
-#[cfg(not(test))]
 #[no_mangle]
-#[allow(unconditional_recursion)]
 pub extern "C" fn _start() -> ! {
+    serial_print!("stack_overflow... ");
+
     blog_os::gdt::init();
     init_test_idt();
-
-    fn stack_overflow() {
-        stack_overflow(); // for each recursion, the return address is pushed
-    }
 
     // trigger a stack overflow
     stack_overflow();
 
-    serial_println!("failed");
-    serial_println!("No exception occured");
-
-    unsafe {
-        exit_qemu();
-    }
-
+    serial_println!("[failed]");
+    serial_println!("Execution continued after stack overflow");
+    exit_qemu(QemuExitCode::Failed);
     loop {}
 }
 
-/// This function is called on panic.
-#[cfg(not(test))]
+#[allow(unconditional_recursion)]
+fn stack_overflow() {
+    stack_overflow(); // for each recursion, the return address is pushed
+}
+
 #[panic_handler]
 fn panic(info: &PanicInfo) -> ! {
-    serial_println!("failed");
+    serial_println!("[failed]");
     serial_println!("{}", info);
-
-    unsafe {
-        exit_qemu();
-    }
-
+    exit_qemu(QemuExitCode::Failed);
     loop {}
 }
 
@@ -68,10 +58,7 @@ extern "x86-interrupt" fn double_fault_handler(
     _stack_frame: &mut InterruptStackFrame,
     _error_code: u64,
 ) {
-    serial_println!("ok");
-
-    unsafe {
-        exit_qemu();
-    }
+    serial_println!("[ok]");
+    exit_qemu(QemuExitCode::Success);
     loop {}
 }
