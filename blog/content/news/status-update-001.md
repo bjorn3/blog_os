@@ -23,5 +23,5 @@ TODO
 
 - [Update to new bootloader 0.5.1 and bootimage 0.7.2](https://github.com/phil-opp/blog_os/pull/575)
 - [Rewrite the linking section of _"A Freestanding Rust Binary"_](https://github.com/phil-opp/blog_os/pull/577)
-- [ Migrate from Netlify to Github Pages](https://github.com/phil-opp/blog_os/pull/579)
+- [Migrate from Netlify to Github Pages](https://github.com/phil-opp/blog_os/pull/579)
 - [Minimal Rust Kernel: Use a runner to make cargo xrun work](https://github.com/phil-opp/blog_os/pull/582)
