@@ -10,6 +10,7 @@ TODO
 - [Updates for new build system](https://github.com/rust-osdev/bootloader/pull/53)
     - Build upon build system rewrite in [#51](https://github.com/rust-osdev/bootloader/pull/51)
 - Release versions 0.5.0, 0.5.1, 0.5.2, and 0.5.3 ([changelog](https://github.com/rust-osdev/bootloader/blob/master/Changelog.md#053))
+- [Version 0.6.0](https://github.com/rust-osdev/bootloader/pull/55)
 
 ## Bootimage
 
@@ -26,3 +27,4 @@ TODO
 - [Migrate from Netlify to Github Pages](https://github.com/phil-opp/blog_os/pull/579)
 - [Minimal Rust Kernel: Use a runner to make cargo xrun work](https://github.com/phil-opp/blog_os/pull/582)
     - [Add `.cargo/config` file to post-02 branch](https://github.com/phil-opp/blog_os/pull/583)
+- [New testing post](https://github.com/phil-opp/blog_os/pull/584)
